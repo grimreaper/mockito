@@ -23,6 +23,7 @@ public class MismatchReportingTestListener implements MockitoTestListener {
         this.logger = logger;
     }
 
+    @Override
     public void testFinished(TestFinishedEvent event) {
         Collection<Object> createdMocks = mocks;
         //At this point, we don't need the mocks any more and we can mark all collected mocks for gc
@@ -35,6 +36,7 @@ public class MismatchReportingTestListener implements MockitoTestListener {
         }
     }
 
+    @Override
     public void onMockCreated(Object mock, MockCreationSettings settings) {
         this.mocks.add(mock);
     }

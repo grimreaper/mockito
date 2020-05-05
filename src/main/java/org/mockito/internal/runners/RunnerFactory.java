@@ -26,22 +26,14 @@ public class RunnerFactory {
      * Creates silent runner implementation
      */
     public InternalRunner create(Class<?> klass) throws InvocationTargetException {
-        return create(klass, new Supplier<MockitoTestListener>() {
-            public MockitoTestListener get() {
-                return new NoOpTestListener();
-            }
-        });
+        return create(klass, NoOpTestListener::new);
     }
 
     /**
      * Creates strict runner implementation
      */
     public InternalRunner createStrict(Class<?> klass) throws InvocationTargetException {
-        return create(klass, new Supplier<MockitoTestListener>() {
-            public MockitoTestListener get() {
-                return new MismatchReportingTestListener(Plugins.getMockitoLogger());
-            }
-        });
+        return create(klass, () -> new MismatchReportingTestListener(Plugins.getMockitoLogger()));
     }
 
     /**
@@ -50,11 +42,7 @@ public class RunnerFactory {
      * TODO, let's try to apply Brice suggestion and use switch + Strictness
      */
     public InternalRunner createStrictStubs(Class<?> klass) throws InvocationTargetException {
-        return create(klass, new Supplier<MockitoTestListener>() {
-            public MockitoTestListener get() {
-                return new StrictStubsRunnerTestListener();
-            }
-        });
+        return create(klass, StrictStubsRunnerTestListener::new);
     }
 
     /**
