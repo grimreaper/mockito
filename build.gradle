@@ -15,7 +15,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.gradle.build-scan' version '2.2.1'
+    id 'com.gradle.build-scan' version '3.3'
     id "com.diffplug.gradle.spotless" version "3.24.3"
     id 'eclipse'
 }
